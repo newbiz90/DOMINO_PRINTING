@@ -78,7 +78,7 @@ Rails.application.configure do
   # config.action_mailer.raise_delivery_errors = false
 
   # Added by Matthew Oh on 23 Mar 2024
-  config.action_mailer.default_url_options = { host: 'https://domino-printing-00eec65f2248.herokuapp.com/' }
+  config.action_mailer.default_url_options = { host: 'domino-printing-00eec65f2248.herokuapp.com' }
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
