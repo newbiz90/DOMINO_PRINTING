@@ -1,1 +1,55 @@
-<p>I'm matthew root login view</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Client</title>
+</head>
+<body>
+    <h1>WebSocket Client</h1>
+    <label for="ipAddress">WebSocket Server IP:</label>
+    <input type="text" id="ipAddress" placeholder="Enter IP address">
+    <br>
+    <input type="text" id="messageInput">
+    <button onclick="sendMessage()">Send Message</button>
+    <div id="messageArea"></div>
+
+    <script>
+        let ipAddressInput = document.getElementById('ipAddress');
+        let ipAddress = ipAddressInput.value.trim() || 'localhost'; // Default to localhost if empty
+
+        const socket = new WebSocket('ws://' + ipAddress + ':3000');
+
+        // Event handler for when the connection is established
+        socket.onopen = function(event) {
+            console.log('WebSocket connection established.');
+        };
+
+        // Event handler for incoming messages from the WebSocket server
+        socket.onmessage = function(event) {
+            console.log('Received message from server:', event.data);
+            displayMessage(event.data);
+        };
+
+        // Event handler for when the connection is closed
+        socket.onclose = function(event) {
+            console.log('WebSocket connection closed.');
+        };
+
+        // Function to send a message to the WebSocket server
+        function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const message = messageInput.value;
+
+            // Send the message to the WebSocket server
+            socket.send(message);
+        }
+
+        // Function to display a message in the message area
+        function displayMessage(message) {
+            const messageArea = document.getElementById('messageArea');
+            messageArea.innerHTML += `<p>${message}</p>`;
+        }
+    </script>
+</body>
+</html>
