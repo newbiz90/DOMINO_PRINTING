@@ -1,23 +1,31 @@
 # db/seeds.rb
 
-# Create an admin user
-admin_user = User.create!(
-  email: 'admin@example.com',
-  role: 1,  # Assign the role as an integer
-  password: 'password',
-  password_confirmation: 'password',
-  created_at: Time.zone.now,
-  updated_at: Time.zone.now
-)
+# Seed data for Supplier A
+(1..10).each do |i|
+  ProjectProgress.create(
+    supplier: 'Supplier A',
+    task: "Task #{i}",
+    progress: "#{rand(100)}%", # Random progress between 0% to 100%
+    estimated_completion: Date.today + rand(10).days # Random estimated completion date within next 10 days
+  )
+end
 
-# Create a regular user
-regular_user = User.create!(
-  email: 'user@example.com',
-  role: 0,  # Assign the role as an integer
-  password: 'password',
-  password_confirmation: 'password',
-  created_at: Time.zone.now,
-  updated_at: Time.zone.now
-)
+# Seed data for Supplier B
+(1..10).each do |i|
+  ProjectProgress.create(
+    supplier: 'Supplier B',
+    task: "Task #{i}",
+    progress: "#{rand(100)}%", # Random progress between 0% to 100%
+    estimated_completion: Date.today + rand(10).days # Random estimated completion date within next 10 days
+  )
+end
 
-puts "Seed data created successfully!"
+# Seed data for Supplier C
+(1..10).each do |i|
+  ProjectProgress.create(
+    supplier: 'Supplier C',
+    task: "Task #{i}",
+    progress: "#{rand(100)}%", # Random progress between 0% to 100%
+    estimated_completion: Date.today + rand(10).days # Random estimated completion date within next 10 days
+  )
+end

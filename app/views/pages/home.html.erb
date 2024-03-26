@@ -1,103 +1,34 @@
 <div class="container mt-4">
   <div class="p-4 border rounded">
-    <h2 class="mb-4">Project Tracking</h2>
+    <h2 class="mb-4">Project Tracking (Domino & Osapien Interfacing)</h2>
     <div class="row">
-      <% if defined?(@supplier_a_progress) %>
+      <% @project_progress.each do |supplier_name, progress_data| %>
       <div class="col">
-        <h3>Supplier A</h3>
+        <h3><%= supplier_name %></h3>
         <table class="table">
           <thead>
             <tr>
-              <th>Date</th>
+              <th>Task</th>
               <th>Progress</th>
+              <th>Estimated Completion</th>
             </tr>
           </thead>
           <tbody>
-            <% if @supplier_a_progress.any? %>
-              <% @supplier_a_progress.each do |progress| %>
+            <% if progress_data.any? %>
+              <% progress_data.each do |progress| %>
                 <tr>
-                  <td><%= progress[:date] %></td>
+                  <td><%= progress[:task] %></td>
                   <td><%= progress[:progress] %></td>
+                  <td><%= progress[:estimated_completion] %></td>
                 </tr>
               <% end %>
             <% else %>
               <tr>
-                <td colspan="2">No progress</td>
+                <td colspan="3">No tasks</td>
               </tr>
             <% end %>
           </tbody>
         </table>
-      </div>
-      <% else %>
-      <div class="col">
-        <h3>Supplier A</h3>
-        <p>No progress</p>
-      </div>
-      <% end %>
-
-      <% if defined?(@supplier_b_progress) %>
-      <div class="col">
-        <h3>Supplier B</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Progress</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if @supplier_b_progress.any? %>
-              <% @supplier_b_progress.each do |progress| %>
-                <tr>
-                  <td><%= progress[:date] %></td>
-                  <td><%= progress[:progress] %></td>
-                </tr>
-              <% end %>
-            <% else %>
-              <tr>
-                <td colspan="2">No progress</td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <% else %>
-      <div class="col">
-        <h3>Supplier B</h3>
-        <p>No progress</p>
-      </div>
-      <% end %>
-
-      <% if defined?(@supplier_c_progress) %>
-      <div class="col">
-        <h3>Supplier C</h3>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Progress</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% if @supplier_c_progress.any? %>
-              <% @supplier_c_progress.each do |progress| %>
-                <tr>
-                  <td><%= progress[:date] %></td>
-                  <td><%= progress[:progress] %></td>
-                </tr>
-              <% end %>
-            <% else %>
-              <tr>
-                <td colspan="2">No progress</td>
-              </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
-      <% else %>
-      <div class="col">
-        <h3>Supplier C</h3>
-        <p>No progress</p>
       </div>
       <% end %>
     </div>

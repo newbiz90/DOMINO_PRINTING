@@ -10,9 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_21_081352) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_26_070346) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "project_progresses", force: :cascade do |t|
+    t.string "supplier"
+    t.string "task"
+    t.float "progress"
+    t.date "estimated_completion"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
