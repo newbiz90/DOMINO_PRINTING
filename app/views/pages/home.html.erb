@@ -1,34 +1,45 @@
 <div class="container mt-4">
   <div class="p-4 border rounded">
     <h2 class="mb-4">Project Tracking</h2>
-    <div class="row">
-      <% @projects.each do |project| %>
-        <div class="col">
-          <h3><%= project.name %></h3>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Progress</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if project.project_progresses.any? %>
-                <% project.project_progresses.each do |progress| %>
+    <% @projects.each do |project| %>
+      <h3><%= project.name %></h3>
+      <div class="row">
+        <% project.project_progresses.group_by(&:supplier).each do |supplier_name, progresses| %>
+          <div class="col">
+            <h4>Supplier: <%= supplier_name %></h4>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Task</th>
+                  <th>Date</th>
+                  <th>Progress</th>
+                  <th>Progress Bar</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if progresses.any? %>
+                  <% progresses.each do |progress| %>
+                    <tr>
+                      <td><%= progress.task %></td>
+                      <td><%= progress.estimated_completion %></td>
+                      <td><%= progress.progress %>%</td>
+                      <td>
+                        <div class="progress">
+                          <div class="progress-bar bg-success" role="progressbar" style="width: <%= progress.progress %>%;" aria-valuenow="<%= progress.progress %>" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% else %>
                   <tr>
-                    <td><%= progress.estimated_completion %></td>
-                    <td><%= progress.progress %></td>
+                    <td colspan="3">No progress</td>
                   </tr>
                 <% end %>
-              <% else %>
-                <tr>
-                  <td colspan="2">No progress</td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-        </div>
-      <% end %>
-    </div>
+              </tbody>
+            </table>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
