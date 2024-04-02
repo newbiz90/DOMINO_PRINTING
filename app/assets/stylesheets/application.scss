@@ -10,3 +10,18 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
+
+/* application.scss */
+
+.chat-text-area {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 16px;
+  resize: none;
+}
+
+.chat-text-area:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
