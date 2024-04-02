@@ -1,9 +1,10 @@
 # controllers/chat_controller.rb
 
 class ChatController < ApplicationController
-  def create
-    prompt = params[:prompt]
-    response = OpenaiService.create_chat(prompt)
-    render json: response['choices'][0]['text']
+  skip_before_action :authenticate_user!, only: :show
+
+  def show
+    @prompt = params[:prompt]
+    @openai_response = OpenaiService.create_chat(@prompt) if @prompt.present?
   end
 end
